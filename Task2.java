@@ -12,7 +12,7 @@ public class Task2 {
 		basic_salary=sc.nextInt();
 		hra=(float) (0.4*basic_salary);
 		da=(float) (0.6*(basic_salary+hra));
-		total=basic_salary+hra+da;
+		total=(basic_salary+hra+da)*12;
 		if(total<200000)
 		{
 			tax=0;
@@ -25,8 +25,8 @@ public class Task2 {
 			tax=(float) (0.2*total);
 		}
 		takeaway_salary=total-tax;
-		System.out.println("Home Takeaway Salary: "+takeaway_salary+
-				"\nHome Rental Allowance:"+hra+"\nDearness Allowance:"
+		System.out.println("Annual Home Takeaway Salary: "+takeaway_salary+
+				"\nMonthly Home Rental Allowance:"+hra+"\nMonthly Dearness Allowance:"
 				+da+"\nTAX:"+tax);
 	
 }
