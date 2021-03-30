@@ -9,7 +9,7 @@ public class Task3 {
 		Scanner sc= new Scanner(System.in);
 		System.out.println("Enter the date");
 		int dd=sc.nextInt();
-		if(dd>=0 && dd<=31) 
+		 if(dd>0 && dd<=31) 
 		{
 			int last_digit=dd%10;
 			if(dd==11)
