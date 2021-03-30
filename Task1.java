@@ -2,7 +2,7 @@ package day1;
 
 import java.util.Scanner;
 
-public class Task3 {
+public class Task1 {
 
 	public static void main(String[] args) {
 		int eng_marks,java,db_marks,springTools,total_marks,avg;
