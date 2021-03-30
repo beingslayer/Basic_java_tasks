@@ -13,11 +13,11 @@ public class Task2 {
 		hra=(float) (0.4*basic_salary);
 		da=(float) (0.6*(basic_salary+hra));
 		total=basic_salary+hra+da;
-		if(basic_salary<200000)
+		if(total<200000)
 		{
 			tax=0;
 		}
-		else if(basic_salary>=200000 && basic_salary<=600000)
+		else if(total>=200000 && total<=600000)
 		{
 			tax=(float) (0.1*total); 
 		}
