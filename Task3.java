@@ -12,7 +12,7 @@ public class Task3 {
 		 if(dd>0 && dd<=31) 
 		{
 			int last_digit=dd%10;
-			if(dd==11 && dd==13)
+			if(dd==11 || dd==13)
 			{
 				System.out.println(""+dd+"th");
 			}
