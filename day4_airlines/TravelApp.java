@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class TravelApp {
 	static String flydate, flytime, arrivedate, arrivetime;
-	static int basefare, hr, hault_no, hourofhault;
 	static LocalDateTime flying_date, arriving_date;
 	static String flight_no, flight_name, flight_source, destination;
 	static String hault_name;
@@ -16,81 +15,94 @@ public class TravelApp {
 	public static void main(String[] args) {
 		/* Write code to call Flight constructor and Flight class setter methods */
 		boolean flag = false;
-		int tax = 0;
+		int tax = 0,no_of_flights,basefare, hr, hault_no, hourofhault;
 		Flight flight = new Flight();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the following flight details");
-		System.out.printf("Flight Number-->");
-		flight_no = sc.nextLine();
-		System.out.printf("Flight Name-->");
-		flight_name = sc.nextLine();
-		System.out.printf("Source-->");
-		flight_source = sc.nextLine();
-		System.out.printf("Flight Fly Day,month and year(YYYY-mm-DD)");
-		flydate = sc.nextLine();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate fdate = LocalDate.parse(flydate, formatter);
-		System.out.printf("Flight Fly hour and minute(HH::MM)");
-		flytime = sc.nextLine();
-		LocalTime time = LocalTime.parse(flytime);
-		flying_date = dateFormat(fdate, time);
-		System.out.printf("Destination-->");
-		destination = sc.nextLine();
-		System.out.printf("Flight arrival Day,month and year(YYYY-mm-DD)");
-		arrivedate = sc.nextLine();
-		LocalDate adate = LocalDate.parse(arrivedate, formatter);
-		System.out.printf("Flight arrival hour and minute(HH::MM)");
-		arrivetime = sc.nextLine();
-		LocalTime atime = LocalTime.parse(arrivetime);
-		arriving_date = dateFormat(adate, atime);
-		System.out.println("How many haults");
-		hault_no = sc.nextInt();
+		System.out.println("How many flights");
+		 no_of_flights = sc.nextInt();
 		sc.nextLine();
-		if (hault_no > 0) {
-			Hault[] ht = new Hault[hault_no];
-			for (int i = 0; i < hault_no; i++) {
-				Hault temp = new Hault();
-				System.out.println("Hault Airport name");
-				hault_name = sc.nextLine();
-				temp.setAirportName(hault_name);
-				System.out.println("Duration in hr");
-				hourofhault = sc.nextInt();
-				temp.setDuration(hourofhault);
-				sc.nextLine();
-				ht[i] = temp;
+		Flight[] f = new Flight[no_of_flights];
+		for (int i = 0; i < no_of_flights; i++) {
+			f[i] = new Flight();
+			System.out.println("Enter the following flight details");
+			System.out.printf("Flight Number-->");
+			flight_no = sc.nextLine();
+			f[i].setFlightNumber(flight_no);
+			System.out.printf("Flight Name-->");
+			flight_name = sc.nextLine();
+			f[i].setAirliner(flight_name);
+			System.out.printf("Source-->");
+			flight_source = sc.nextLine();
+			f[i].setSource(flight_source);
+			System.out.printf("Flight Fly Day,month and year(YYYY-mm-DD)");
+			flydate = sc.nextLine();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate fdate = LocalDate.parse(flydate, formatter);
+			System.out.printf("Flight Fly hour and minute(HH::MM)");
+			flytime = sc.nextLine();
+			LocalTime time = LocalTime.parse(flytime);
+			flying_date = dateFormat(fdate, time);
+			f[i].setFlyDateTime(flying_date);
+
+			System.out.printf("Destination-->");
+			destination = sc.nextLine();
+			f[i].setDestination(destination);
+
+			System.out.printf("Flight arrival Day,month and year(YYYY-mm-DD)");
+			arrivedate = sc.nextLine();
+			LocalDate adate = LocalDate.parse(arrivedate, formatter);
+
+			System.out.printf("Flight arrival hour and minute(HH::MM)");
+			arrivetime = sc.nextLine();
+			LocalTime atime = LocalTime.parse(arrivetime);
+
+			arriving_date = dateFormat(adate, atime);
+			f[i].setArrivalDateTime(arriving_date);
+
+			System.out.println("How many haults");
+			hault_no = sc.nextInt();
+
+			sc.nextLine();
+			if (hault_no > 0) {
+				Hault[] ht = new Hault[hault_no];
+				for (int j = 0; j < hault_no; j++) {
+					ht[j] = new Hault();
+					System.out.println("Hault Airport name");
+					hault_name = sc.nextLine();
+					ht[j].setAirportName(hault_name);
+					System.out.println("Duration in hr");
+					hourofhault = sc.nextInt();
+					ht[j].setDuration(hourofhault);
+					sc.nextLine();
+				}
+				flight.setHault(ht);
 			}
-			flight.setHault(ht);
+
+			System.out.printf("Flight Type:  1.International \t 2.Domestic");
+			System.out.print("Your choice (1 or 2):-");
+			int flight_type = sc.nextInt();
+			f[i].setFlyType(flag);
+
+			if (flight_type == 1) {
+				flag = true;
+				System.out.printf("Tax Rate-->");
+				tax = sc.nextInt();
+				f[i].setInternationFlyTax(tax);
+
+			} else if (flight_type == 2) {
+				flag = false;
+				tax = 0;
+			} else {
+				System.out.println("ERROR");
+			}
+			System.out.printf("Base Fare-->");
+			basefare = sc.nextInt();
+			f[i].setBaseFare(basefare);
+			f[i].calculateCost();
+			sc.nextLine();
 		}
-
-		System.out.printf("Flight Type:  1.International \t 2.Domestic");
-		System.out.print("Your choice (1 or 2):-");
-		int flight_type = sc.nextInt();
-		if (flight_type == 1) {
-			flag = true;
-			System.out.printf("Tax Rate-->");
-			tax = sc.nextInt();
-		} else if (flight_type == 2) {
-			flag = false;
-			tax = 0;
-		} else {
-			System.out.println("ERROR");
-		}
-		System.out.printf("Base Fare-->");
-		basefare = sc.nextInt();
-
-		flight.setAirliner(flight_name);
-		flight.setFlightNumber(flight_no);
-		flight.setSource(flight_source);
-		flight.setFlyDateTime(flying_date);
-		flight.setDestination(destination);
-		flight.setArrivalDateTime(arriving_date);
-		flight.setFlyType(flag);
-		flight.setInternationFlyTax(tax);
-		flight.setBaseFare(basefare);
-		flight.calculateCost();
-
 		FlightDetails flightDetails = new FlightDetails();
-		flightDetails.printFlightDetails(flight);
+		flightDetails.printFlightDetails(f);
 
 	}
 

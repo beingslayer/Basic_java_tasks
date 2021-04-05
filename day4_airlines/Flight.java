@@ -1,10 +1,6 @@
 package day4_airlines;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 
 public class Flight {
 
@@ -16,6 +12,7 @@ public class Flight {
 
 	private String destination;
 	private LocalDateTime arrivalDateTime;
+	
 
 	private Hault[] hault; // can be null;
 
