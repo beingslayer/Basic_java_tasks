@@ -11,11 +11,11 @@ public class TravelApp {
 	static LocalDateTime flying_date, arriving_date;
 	static String flight_no, flight_name, flight_source, destination;
 	static String hault_name;
-
+	static int no_of_flights,basefare, hr, hault_no, hourofhault;
 	public static void main(String[] args) {
 		/* Write code to call Flight constructor and Flight class setter methods */
 		boolean flag = false;
-		int tax = 0,no_of_flights,basefare, hr, hault_no, hourofhault;
+		int tax = 0;
 		Flight flight = new Flight();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("How many flights");
